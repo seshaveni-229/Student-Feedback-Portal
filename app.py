@@ -20,8 +20,8 @@ def feedback():
         
         conn = get_db_connection()
         cursor = conn.cursor()
-        cursor.execute("INSERT INTO feedback (student_name, email, comments) VALUES (%s, %s, %s)", (name, email, comment))
-        conn.commit()
+        cursor.execute("INSERT INTO feedback (student_name, email, comments) VALUES (%s, %s, %s)",(name, email, comment))
+
         cursor.close()
         conn.close()
         return redirect('/')
@@ -31,7 +31,7 @@ def feedback():
 def admin():
     conn=get_db_connection()
     cursor = conn.cursor(dictionary=True)
-    cursor.execute("SELECT * FROM feedback ORDER BY submitted_at DESC")
+    cursor.execute("SELECT id, student_name, comments, Submitting_at FROM feedback ORDER BY Submitting_at DESC")
     feedbacks=cursor.fetchall()
     cursor.close()
     conn.close()
